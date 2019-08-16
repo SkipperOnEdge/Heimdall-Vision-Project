@@ -1,5 +1,7 @@
 #include <Arduino.h>
+#include <Servo.h>
 
+Servo left;
 void setup() {
   // put your setup code here, to run once:
 }
