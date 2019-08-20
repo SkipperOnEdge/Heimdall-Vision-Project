@@ -1,15 +1,13 @@
 #include <Arduino.h>
-#include <Servo.h>
 #include <Constants.h>
 #include <Drivetrain.h>
 
 Drivetrain arcadeDrive;
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);
-  Serial.print(arcadeDrive.init( LEFT_PORT , RIGHT_PORT ));
+  Serial.print(arcadeDrive.init(leftPort, rightPort));
 }
 
 void loop() {
-arcadeDrive.drive( -0.5 , 0);
+  arcadeDrive.drive(50, 0);
 }

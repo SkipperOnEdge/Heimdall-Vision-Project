@@ -5,17 +5,15 @@
 
 class Drivetrain {
     public:
+        static constexpr int upperMax = 100, lowerMin = -upperMax;
         Drivetrain();
         bool init(int leftPort, int rightPort);
-        void drive(double speed, double rotation);
+        void drive(int rawSpeed, int rawRotation);
     private:
         Servo leftServo;
         Servo rightServo;
-        void setServos(int leftServoRaw , int rightServoRaw);
-
-    
+        void setServos(int leftRaw , int rightRaw);
+        static int limit(int amount);
 };
-
-
 
 #endif

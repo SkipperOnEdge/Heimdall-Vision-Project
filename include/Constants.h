@@ -1,7 +1,6 @@
 #ifndef Constants_h
 #define Constants_h
 
-#define LEFT_PORT 13
-#define RIGHT_PORT 12
-
+constexpr int leftPort = 13;
+constexpr int rightPort = 13;
 #endif

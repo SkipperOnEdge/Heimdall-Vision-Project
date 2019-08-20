@@ -1,8 +1,17 @@
 #include <Drivetrain.h>
 #include <Arduino.h>
 
-Drivetrain::Drivetrain() : leftServo(Servo()), rightServo(Servo())  {
+int Drivetrain::limit(int amount) {
+    if(amount > upperMax) {
+        return upperMax;
+    } else if (amount < lowerMin) {
+        return lowerMin;
+    } else {
+        return amount;
+    }
 }
+
+Drivetrain::Drivetrain() : leftServo(Servo()), rightServo(Servo()) {}
 
 bool Drivetrain::init(int leftPort, int rightPort) {
     bool left = leftServo.attach(leftPort);
@@ -12,45 +21,38 @@ bool Drivetrain::init(int leftPort, int rightPort) {
     return left && right;
 }
 
-void Drivetrain::drive(double rawSpeed, double rawRotation) {
-    //speed = copysign(speed * speed / 100, speed);
-    //rotation = copysign(rotation * rotation / 100, rotation);
-    int speed = (int)rawSpeed * 100;
-    int rotation = (int)rawRotation * 100;
-    int maxInput = copysign(max(abs(speed), abs(rotation)), speed);
-    Serial.println(speed);
-    Serial.println(rotation);
+void Drivetrain::drive(int rawSpeed, int rawRotation) {
+    rawSpeed = limit(rawSpeed), rawRotation = limit(rawRotation);
+    
+    int speed = copysign(rawSpeed * rawSpeed / 100, rawSpeed);
+    int rotation = copysign(rawRotation * rawRotation / 100, rawRotation);
 
+    int maxInput = copysign(max(abs(speed), abs(rotation)), speed);
 
     int leftMotorOutput;
     int rightMotorOutput;
 
-    if( speed > 0 ) {
-        if(rotation > 0) {
+    if(speed >= 0) {
+        if(rotation >= 0) {
             leftMotorOutput = maxInput;
             rightMotorOutput = speed - rotation;
-        }
-        else if (speed < 0){
+        } else {
             leftMotorOutput = speed + rotation;
             rightMotorOutput = maxInput;
         }
-    }
-    else{
-        if(rotation > 0) {
+    } else {
+        if(rotation >= 0) {
             leftMotorOutput = speed + rotation;
             rightMotorOutput = maxInput;
-        }
-        else {
+        } else {
             leftMotorOutput = maxInput;
             rightMotorOutput = speed - rotation;
         }
-    }
-    if(speed = 0) {leftMotorOutput = rightMotorOutput = 0;}
- 
-    setServos(leftMotorOutput , rightMotorOutput);
+    } 
+    setServos(limit(leftMotorOutput), limit(rightMotorOutput) * -1);
 }
 
-void Drivetrain::setServos( int leftMotorRaw, int rightMotorRaw) {
-    leftServo.write(map( leftMotorRaw , -100 , 100 , 0 , 180));
-    rightServo.write(map( rightMotorRaw , -100 , 100 , 180 , 0));
+void Drivetrain::setServos(int leftRaw, int rightRaw) {
+    leftServo.write(map(leftRaw, -100, 100, 0, 180));
+    rightServo.write(map(rightRaw, -100, 100, 0, 180));
 }
