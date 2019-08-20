@@ -23,7 +23,7 @@ bool Drivetrain::init(int leftPort, int rightPort) {
 
 void Drivetrain::drive(int rawSpeed, int rawRotation) {
     rawSpeed = limit(rawSpeed), rawRotation = limit(rawRotation);
-    
+
     int speed = copysign(rawSpeed * rawSpeed / 100, rawSpeed);
     int rotation = copysign(rawRotation * rawRotation / 100, rawRotation);
 
@@ -49,10 +49,10 @@ void Drivetrain::drive(int rawSpeed, int rawRotation) {
             rightMotorOutput = speed - rotation;
         }
     } 
-    setServos(limit(leftMotorOutput), limit(rightMotorOutput) * -1);
+    rawDrive(limit(leftMotorOutput), limit(rightMotorOutput) * -1);
 }
 
-void Drivetrain::setServos(int leftRaw, int rightRaw) {
-    leftServo.write(map(leftRaw, -100, 100, 0, 180));
-    rightServo.write(map(rightRaw, -100, 100, 0, 180));
+void Drivetrain::rawDrive(int leftSpeed, int rightSpeed) {
+    leftServo.write(map(leftSpeed, -100, 100, 0, 180));
+    rightServo.write(map(rightSpeed, -100, 100, 0, 180));
 }

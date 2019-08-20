@@ -9,10 +9,10 @@ class Drivetrain {
         Drivetrain();
         bool init(int leftPort, int rightPort);
         void drive(int rawSpeed, int rawRotation);
+        void rawDrive(int leftSpeed, int rightSpeed);
     private:
         Servo leftServo;
         Servo rightServo;
-        void setServos(int leftRaw , int rightRaw);
         static int limit(int amount);
 };
 
