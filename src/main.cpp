@@ -11,5 +11,5 @@ void setup() {
 }
 
 void loop() {
-arcadeDrive.drive( 0 , 100);
+arcadeDrive.drive( -0.5 , 0);
 }

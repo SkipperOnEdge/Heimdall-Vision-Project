@@ -7,7 +7,7 @@ class Drivetrain {
     public:
         Drivetrain();
         bool init(int leftPort, int rightPort);
-        void drive(int speed, int rotation);
+        void drive(double speed, double rotation);
     private:
         Servo leftServo;
         Servo rightServo;
