@@ -24,8 +24,8 @@ bool Drivetrain::init(int leftPort, int rightPort) {
 void Drivetrain::drive(int rawSpeed, int rawRotation) {
     rawSpeed = limit(rawSpeed), rawRotation = limit(rawRotation);
 
-    int speed = copysign(rawSpeed * rawSpeed / 100, rawSpeed);
-    int rotation = copysign(rawRotation * rawRotation / 100, rawRotation);
+    int speed = copysign(rawSpeed, rawSpeed);
+    int rotation = copysign(rawRotation, rawRotation);
 
     int maxInput = copysign(max(abs(speed), abs(rotation)), speed);
 
