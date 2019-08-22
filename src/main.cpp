@@ -6,12 +6,11 @@ Drivetrain arcadeDrive;
 void setup() {
   Serial.begin(9600);
   Serial.print(arcadeDrive.init(leftPort, rightPort));
-  int forwardInput = 0;
-  int rotationInput = 0;
 }
 
 void loop() {
-  int forwardInput = 0;
-  int rotationInput = 0;
+  int forwardInput = 50;
+  int rotationInput = 60;
   arcadeDrive.drive(forwardInput , rotationInput);
+  // arcadeDrive.rawDrive(0,0);
 }
