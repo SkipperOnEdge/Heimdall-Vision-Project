@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <Constants.h>
 #include <Drivetrain.h>
+#include <Stream.h>
 
 Drivetrain arcadeDrive;
 void setup() {
@@ -12,6 +13,7 @@ void setup() {
 }
 
 void loop() {
+  Serial.print(Serial.available());
   // int forwardInput = 50;
   // int rotationInput = 60;
   // arcadeDrive.drive(forwardInput , rotationInput);

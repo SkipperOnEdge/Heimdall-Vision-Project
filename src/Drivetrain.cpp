@@ -49,12 +49,9 @@ void Drivetrain::drive(int rawSpeed, int rawRotation) {
 }
 
 void Drivetrain::rawDrive(int leftSpeed, int rightSpeed) {
-    // Serial.println(map(leftSpeed, -100, 100, 0, 180));
-    // Serial.println(map(rightSpeed, -100, 100, 0, 180));
-    // Serial.println(" ");
-    // leftServo.write(map(leftSpeed, -100, 100, 0, 180));
-    // rightServo.write(map(rightSpeed, -100, 100, 0, 180));
-    leftServo.writeMicroseconds(1000);
-    rightServo.writeMicroseconds(2000);
-
+    Serial.println(map(leftSpeed, -100, 100, 0, 180));
+    Serial.println(map(rightSpeed, -100, 100, 0, 180));
+    Serial.println(" ");
+    leftServo.writeMicroseconds(map(leftSpeed, -100, 100, 1400, 1600));
+    rightServo.writeMicroseconds(map(rightSpeed, -100, 100, 1400, 1600));
 }
