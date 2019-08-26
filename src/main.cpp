@@ -13,9 +13,9 @@ void setup() {
 }
 
 void loop() {
-  Serial.print(Serial.available());
-  // int forwardInput = 50;
-  // int rotationInput = 60;
-  // arcadeDrive.drive(forwardInput , rotationInput);
-   arcadeDrive.rawDrive(2,-2);
+  
+  int forwardInput = 80 ;
+  int rotationInput = 40;
+  arcadeDrive.drive(forwardInput , rotationInput);
+  //  arcadeDrive.rawDrive(100,-100);
 }
