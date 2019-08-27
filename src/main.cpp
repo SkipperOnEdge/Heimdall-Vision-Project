@@ -3,7 +3,8 @@
 #include <Drivetrain.h>
 #include <Stream.h>
 
-Drivetrain arcadeDrive;
+Drivetrain arcadeDrive{};
+
 void setup() {
   Serial.begin(9600);
   arcadeDrive.init([](Servo leftServo, Servo rightServo) {
@@ -13,9 +14,10 @@ void setup() {
 }
 
 void loop() {
-  
-  int forwardInput = 80 ;
-  int rotationInput = 40;
-  arcadeDrive.drive(forwardInput , rotationInput);
-  //  arcadeDrive.rawDrive(100,-100);
+  while (Serial.available() > 0) {
+    int speed = Serial.parseInt();
+    int rotation = Serial.parseInt();
+
+    arcadeDrive.drive(speed, rotation);
+  }
 }
